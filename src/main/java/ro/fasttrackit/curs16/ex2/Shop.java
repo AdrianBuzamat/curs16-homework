@@ -59,12 +59,12 @@ public class Shop<T extends ShopItem> {
     }
 
     public Optional<T> removeItem(String name) {
-        Optional<String> check = Optional.ofNullable(name);
-        if (check.isPresent()) {
-            Iterator<T> iterator = items.iterator();
-            while (iterator.hasNext()) {
-                if (iterator.next().name().equals(name)) {
-                    iterator.remove();
+        Optional<String> checkName = Optional.ofNullable(name);
+        if (checkName.isPresent()) {
+            for (T item : items) {
+                if (item.name().equals(name)) {
+                    items.remove(item);
+                    return Optional.of(item);
                 }
             }
         }
